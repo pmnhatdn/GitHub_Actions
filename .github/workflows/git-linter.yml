@@ -4,17 +4,23 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "!*.md"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: git-status-check
+      run: |
+        apt-get update && apt-get install -y git
+        git remote add github git@github.com:bebit/ug_analysis.git
+        git fetch github master
+        merge_target=github/master
+        rebase_base=$(git rev-parse ${merge_target})
+        echo ${rebase_base}
 
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    - name: Run a multi-line script
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
