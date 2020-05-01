@@ -15,12 +15,11 @@ jobs:
     - name: git-status-check
       run: |
         apt-get update && apt-get install -y git
-        git remote add github git@github.com:bebit/ug_analysis.git
-        git fetch github master
-        merge_target=github/master
-        rebase_base=$(git rev-parse ${merge_target})
-        echo ${rebase_base}
-
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        git checkout master
+        latest_commit=$(git log --pretty=%H | head -n 1)
+        pwd
+        echo ${latest_commit}
+        # git fetch github master
+        # merge_target=github/master
+        # rebase_base=$(git rev-parse ${merge_target})
+        # echo ${rebase_base}
