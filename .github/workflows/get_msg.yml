@@ -5,6 +5,7 @@ on:
     type: [labeled]
     paths:
       - 'get_message/**'
+      - '.github/workflow/**'
 
 jobs:
   get-msg:
