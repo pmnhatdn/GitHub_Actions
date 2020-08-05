@@ -12,4 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set commit message to an environment variable
-        run: echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha  }})
+        run: |
+          echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha  }})
+          echo commit message is ${commit_msg}
