@@ -2,7 +2,7 @@ name: Get commit message
 
 on:
   pull_request:
-    type: [opened, synchronize]
+    type: [labeled]
     paths:
       - 'get_message/**'
 
@@ -14,4 +14,6 @@ jobs:
       - name: Set commit message to an environment variable
         run: |
           echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha  }})
+          echo commit message is ${commit_msg}
+          echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.head_commit.message  }})
           echo commit message is ${commit_msg}
