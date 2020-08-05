@@ -15,5 +15,5 @@ jobs:
         run: |
           echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha  }})
           echo commit message is ${commit_msg}
-          echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.head_commit.message  }})
+          echo ::set-env name=commit_msg::${{ github.event.head_commit.message }}
           echo commit message is ${commit_msg}
