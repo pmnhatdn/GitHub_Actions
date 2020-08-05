@@ -1,0 +1,13 @@
+name: Get commit message
+
+on:
+  pull_request:
+    type: [opened, synchronize]
+    paths:
+      - 'get_message/**'
+
+jobs:
+  get-msg:
+    runs-on: ubuntu-latest
+      - name: Set commit message to an environment variable
+        run: echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha  }})
