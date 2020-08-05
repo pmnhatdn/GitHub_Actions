@@ -11,9 +11,8 @@ jobs:
   get-msg:
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Set commit message to an environment variable
         run: |
           # echo ::set-env name=commit_msg::$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha  }})
           echo "commit message is ${{ github.event.head_commit.message }}"
-          echo commit message is ${commit_msg}
