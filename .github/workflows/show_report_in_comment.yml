@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize]
     paths:
       - 'show_message_in_comment/**'
+      - '.github/workflows/show_report_in_comment.yml'
 
 
 jobs:
