@@ -1,0 +1,40 @@
+name: unit_test
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'show_message_in_comment/**'
+
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Run unit test
+        id: unit-test
+        working-directory: show_message_in_comment
+        run: |
+          coverage run -m pytest
+          report=$(coverage report -m --omit="test*")
+          echo "${report}"
+          report="${report//'%'/'%25'}"
+          report="${report//$'\n'/'%0A'}"
+          echo "::set-output name=report::${report}"
+
+      - name: Post the coverage report on the PR
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            <details><summary>Unit test report</summary>
+            ```
+            ${{ steps.unit-test.outputs.report }}
+            ```
+            </details>
+            Reference: https://github.com/k3forx/GitHub_Actions/actions/runs/${{ github.run_id }}
