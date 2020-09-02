@@ -27,6 +27,7 @@ jobs:
         id: unit-test
         working-directory: show_message_in_comment
         run: |
+          pip install -r requirements.test.txt
           coverage run -m pytest
           report=$(coverage report -m --omit="test*")
           echo "${report}"
