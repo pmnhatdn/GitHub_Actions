@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize]
     paths:
       - 'show_message_in_comment/**'
+      - '.github/workflows/show_report_in_comment.yml'
 
 
 jobs:
@@ -14,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.7
 
       - uses: actions/cache@v2
         with:
@@ -31,7 +32,6 @@ jobs:
           coverage run -m pytest
           report=$(coverage report -m --omit="test*")
           echo "${report}"
-          report="${report//'%'/'%25'}"
           report="${report//$'\n'/'%0A'}"
           echo "::set-output name=report::${report}"
 
@@ -41,8 +41,10 @@ jobs:
           issue-number: ${{ github.event.number }}
           body: |
             <details><summary>Unit test report</summary>
+
             ```
             ${{ steps.unit-test.outputs.report }}
             ```
             </details>
+
             Reference: https://github.com/k3forx/GitHub_Actions/actions/runs/${{ github.run_id }}
