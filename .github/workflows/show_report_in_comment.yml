@@ -16,6 +16,13 @@ jobs:
         with:
           python-version: 3.8
 
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('**/requirements.test.txt') }}
+          restore-keys: |
+            pip-
+
       - name: Run unit test
         id: unit-test
         working-directory: show_message_in_comment
