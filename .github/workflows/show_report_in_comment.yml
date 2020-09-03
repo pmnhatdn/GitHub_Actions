@@ -19,6 +19,7 @@ jobs:
       - name: Get commit message
         run: |
           git log --format=%B -n 1
+          git branch --contains
           git log -n 4
 
       - uses: actions/checkout@v2
@@ -28,15 +29,8 @@ jobs:
       - name: Get commit message
         run: |
           git log --format=%B -n 1 --skip 1
-          git log -n 4
-
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Get commit message
-        run: |
-          git log --format=%B -n 1 --skip 1
+          git log --format=%B -n 1
+          git branch --contains
           git log -n 4
 
       - uses: actions/setup-python@v2
