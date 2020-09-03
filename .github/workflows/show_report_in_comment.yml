@@ -19,6 +19,13 @@ jobs:
       - name: Get commit message
         run: git log --format=%B -n 1
 
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Get commit message
+        run: git log --format=%B -n 1
+
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8
