@@ -34,6 +34,7 @@ jobs:
           git log -n 4
 
       - uses: actions/checkout@v2
+      - name: Get commit message
         run: git branch --contains
 
       - uses: actions/setup-python@v2
