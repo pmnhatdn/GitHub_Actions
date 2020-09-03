@@ -15,7 +15,7 @@ class TestSum(unittest.TestCase):
         b = 1
         expect = a - b
         actual = minus(a, b)
-        self.assetEqual(actual, expect)
+        self.assertEqual(actual, expect)
 
 
 if __name__ == "__main__":

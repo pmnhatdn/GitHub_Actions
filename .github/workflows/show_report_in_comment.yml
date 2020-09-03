@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 2
 
       - name: Get commit message
-        run: git log --format=%B -n 1
+        run: git log --format=%B -n 1 --skip 1
 
       - uses: actions/setup-python@v2
         with:
