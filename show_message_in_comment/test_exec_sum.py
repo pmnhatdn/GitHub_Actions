@@ -1,5 +1,5 @@
 import unittest
-from exec_sum import Sum
+from exec_sum import Sum, minus
 
 
 class TestSum(unittest.TestCase):
@@ -9,6 +9,13 @@ class TestSum(unittest.TestCase):
         expect = a + b
         actual = Sum(a, b)
         self.assertEqual(actual, expect)
+
+    def test_minus(self):
+        a = 5
+        b = 1
+        expect = a - b
+        actual = minus(a, b)
+        self.assetEqual(actual, expect)
 
 
 if __name__ == "__main__":
